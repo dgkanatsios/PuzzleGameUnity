@@ -252,7 +252,7 @@ public class Game : MonoBehaviour
     }
 
     private void ScalePieces() {
-        SpriteRenderer spriteRenderer = go[0].GetComponent();
+        SpriteRenderer spriteRenderer = go[0].GetComponent<SpriteRenderer>();
         float screenHeight = Camera.main.orthographicSize * 2f;
         float screenWidth = screenHeight / Screen.height * Screen.width;
         float width = screenWidth / spriteRenderer.sprite.bounds.size.x / 4;
