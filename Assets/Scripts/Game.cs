@@ -11,6 +11,9 @@ public class Game : MonoBehaviour
     {
         gameState = GameState.Start;
 
+        //rescale pieces to adjust to screen
+        ScalePieces();
+
         //random blank piece
         int index = Random.Range(0, Constants.MaxSize);
         go[index].SetActive(false);
@@ -246,6 +249,17 @@ public class Game : MonoBehaviour
         }
         //if we did not return, then we've won!
         gameState = GameState.End;
+    }
+
+    private void ScalePieces() {
+        SpriteRenderer spriteRenderer = go[0].GetComponent();
+        float screenHeight = Camera.main.orthographicSize * 2f;
+        float screenWidth = screenHeight / Screen.height * Screen.width;
+        float width = screenWidth / spriteRenderer.sprite.bounds.size.x / 4;
+        float height = screenHeight / spriteRenderer.sprite.bounds.size.y / 4;
+        for (int c = 0; c < go.Length; c++) {
+            go[c].transform.localScale = new Vector3(width, height, 1f);
+        }
     }
 
     private Vector3 GetScreenCoordinatesFromVieport(int i, int j)
